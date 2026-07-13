@@ -1,14 +1,39 @@
 import { router } from 'expo-router';
-import { StyleSheet, Text } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArcadeButton } from '../../src/components/ui/ArcadeButton';
 import { theme } from '../../src/components/ui/theme';
+import { ROSTER } from '../../src/game/characters/roster';
+import { useSelectionStore } from '../../src/state/selectionStore';
 
 export default function CharacterSelect() {
+  const playerCharacterId = useSelectionStore((s) => s.playerCharacterId);
+  const setPlayerCharacter = useSelectionStore((s) => s.setPlayerCharacter);
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>CHARACTER SELECT</Text>
-      <Text style={styles.body}>Roster not built yet — Phase 3.</Text>
+      <Text style={styles.title}>CHOOSE YOUR FIGHTER</Text>
+      <FlatList
+        data={ROSTER}
+        horizontal
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.list}
+        renderItem={({ item }) => (
+          <Pressable
+            onPress={() => setPlayerCharacter(item.id)}
+            style={[
+              styles.card,
+              { borderColor: item.id === playerCharacterId ? item.color : theme.colors.border },
+            ]}
+          >
+            <View style={[styles.swatch, { backgroundColor: item.color }]} />
+            <Text style={styles.name}>{item.name}</Text>
+            <Text style={styles.stats}>
+              H{item.stats.health} S{item.stats.strength} SP{item.stats.speed} SPC{item.stats.special}
+            </Text>
+          </Pressable>
+        )}
+      />
       <ArcadeButton label="ENTER ARENA" onPress={() => router.push('/match/fight')} />
       <ArcadeButton label="BACK" onPress={() => router.back()} />
     </SafeAreaView>
@@ -25,12 +50,35 @@ const styles = StyleSheet.create({
   },
   title: {
     color: theme.colors.text,
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: '800',
     letterSpacing: 3,
   },
-  body: {
+  list: {
+    gap: 12,
+    paddingHorizontal: 16,
+  },
+  card: {
+    width: 120,
+    padding: 12,
+    borderWidth: 2,
+    backgroundColor: theme.colors.panel,
+    alignItems: 'center',
+    gap: 6,
+  },
+  swatch: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+  },
+  name: {
+    color: theme.colors.text,
+    fontSize: 12,
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  stats: {
     color: theme.colors.textDim,
-    fontSize: 14,
+    fontSize: 10,
   },
 });

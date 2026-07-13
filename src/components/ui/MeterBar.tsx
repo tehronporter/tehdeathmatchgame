@@ -1,4 +1,5 @@
 import { StyleSheet, View } from 'react-native';
+import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { theme } from './theme';
 
 interface MeterBarProps {
@@ -9,9 +10,14 @@ interface MeterBarProps {
 
 export function MeterBar({ value, max, color }: MeterBarProps) {
   const pct = Math.max(0, Math.min(1, max > 0 ? value / max : 0));
+
+  const fillStyle = useAnimatedStyle(() => ({
+    width: withTiming(`${pct * 100}%`, { duration: 150 }),
+  }));
+
   return (
     <View style={styles.track}>
-      <View style={[styles.fill, { width: `${pct * 100}%`, backgroundColor: color }]} />
+      <Animated.View style={[styles.fill, { backgroundColor: color }, fillStyle]} />
     </View>
   );
 }
