@@ -1,0 +1,27 @@
+; Deathmatch Arena — Godot 4 project
+; Engine migration from Expo/react-three-fiber (see docs/ENGINE_EVALUATION.md)
+
+config_version=5
+
+[application]
+
+config/name="Deathmatch Arena"
+config/features=PackedStringArray("4.7")
+run/main_scene="res://scenes/Main.tscn"
+config/icon="res://icon.svg"
+
+[autoload]
+
+GameData="*res://scripts/GameData.gd"
+
+[display]
+
+window/size/viewport_width=1170
+window/size/viewport_height=2532
+window/stretch/mode="canvas_items"
+window/handheld/orientation="portrait"
+
+[rendering]
+
+renderer/rendering_method="forward_plus"
+renderer/rendering_method.mobile="mobile"

@@ -100,3 +100,4 @@ Known bugs confirmed on-device (2026-07-13):
 | Date | Decision | Why |
 |---|---|---|
 | 2026-07-13 | Rendering/physics stack: Option B (react-three-fiber + expo-gl + cannon-es) | User confirmed going with the documented recommendation; dev machine has Xcode 26.3 + simulator ready, so the slower native iteration loop is acceptable. |
+| 2026-07-13 | **SUPERSEDED — migrate engine to Godot 4** (see `docs/ENGINE_EVALUATION.md`) | expo-gl does not render on the iOS Simulator (pure black) and the native loop is slow/fragile; Godot 4.4+ has a Metal renderer (renders in sim + on desktop), built-in Jolt physics/ragdoll, and instant in-editor iteration. Design + roadmap preserved; only the stack changes. Godot 4.7 installed. |

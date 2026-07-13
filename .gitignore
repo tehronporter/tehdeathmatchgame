@@ -40,3 +40,10 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# Godot
+godot/.godot/
+godot/android/
+godot/*.import
+godot/export_presets.cfg
+/godot-exports/

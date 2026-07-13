@@ -1,9 +1,19 @@
 # Architecture — Deathmatch Arena
 
-## ✅ Resolved: rendering & physics engine — Option B
+> ## ⚠️ SUPERSEDED — engine migrated to Godot 4 (2026-07-13)
+> The Expo/react-three-fiber/expo-gl/cannon-es stack described below has been
+> **replaced by Godot 4.4+** (Godot 4.7 in use). expo-gl does not render on the
+> iOS Simulator and the native loop was slow/fragile; Godot has a Metal
+> renderer, built-in Jolt physics, and instant iteration. The **game design and
+> roadmap are unchanged** — see **`docs/ENGINE_EVALUATION.md`** for the decision
+> and the phase remap. The rest of this file (data models, systems, the
+> `src/game` split) remains valid as a **design spec** to reimplement in Godot;
+> the Supabase schema (§5) still applies via Godot HTTP/WebSocket.
 
-Decided 2026-07-13: Option B (react-three-fiber + expo-gl + cannon-es). See
-PROGRESS.md Decision Log. The section below is kept as the record of why.
+## Rendering & physics engine — original Option B decision (historical)
+
+Decided 2026-07-13, superseded same day (see banner above): Option B
+(react-three-fiber + expo-gl + cannon-es). The section below is the record of why.
 
 The original stack notes list **React Native Skia** for rendering and
 **Matter.js** for physics. Worth being direct about this: Skia is a 2D canvas
