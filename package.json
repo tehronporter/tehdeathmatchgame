@@ -1,0 +1,39 @@
+{
+  "name": "deathmatch-arena",
+  "version": "1.0.0",
+  "main": "expo-router/entry",
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "cannon-es": "^0.20.0",
+    "expo": "~57.0.4",
+    "expo-asset": "~57.0.3",
+    "expo-audio": "~57.0.0",
+    "expo-constants": "~57.0.3",
+    "expo-file-system": "~57.0.0",
+    "expo-gl": "~57.0.1",
+    "expo-linking": "~57.0.2",
+    "expo-router": "~57.0.4",
+    "expo-status-bar": "~57.0.0",
+    "react": "19.2.3",
+    "react-native": "0.86.0",
+    "react-native-gesture-handler": "~2.32.0",
+    "react-native-reanimated": "4.5.0",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "4.25.2",
+    "react-native-worklets": "^0.10.0",
+    "three": "^0.185.1",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.2",
+    "typescript": "~6.0.3"
+  },
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web"
+  },
+  "private": true
+}

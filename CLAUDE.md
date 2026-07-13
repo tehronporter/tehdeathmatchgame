@@ -6,13 +6,13 @@ characters (no licensed celebrities), short 90–180 second matches, dead-simple
 controls, over-the-top comedic finishers.
 
 ## Read these in order, every new session
-1. `PRD.md` — scope, features, success criteria
-2. `ARCHITECTURE.md` — tech stack, folder structure, data models, **open technical
-   decision on rendering (read this before writing any game engine code)**
-3. `GAME_DESIGN.md` — characters, arenas, moves, meters, economy
-4. `BUILD_PLAN.md` — phased task list. The active phase is the source of truth for
+1. `docs/PRD.md` — scope, features, success criteria
+2. `docs/ARCHITECTURE.md` — tech stack, folder structure, data models. Rendering
+   decision is resolved: **Option B** (react-three-fiber + expo-gl + cannon-es).
+3. `docs/GAME_DESIGN.md` — characters, arenas, moves, meters, economy
+4. `docs/BUILD_PLAN.md` — phased task list. The active phase is the source of truth for
    what to build next. Don't jump ahead to later phases.
-5. `PROGRESS.md` — living log: what's done, what's in progress, open decisions.
+5. `docs/PROGRESS.md` — living log: what's done, what's in progress, open decisions.
    Update this after every meaningful chunk of work.
 
 ## Ground rules
@@ -24,9 +24,9 @@ controls, over-the-top comedic finishers.
 - Matches: 90–180 seconds.
 - Controls: one virtual joystick (movement) + 4 buttons (punch / kick / grab /
   special). Do not add combo inputs, extra buttons, or gestures.
-- Visual style: low-poly + modern lighting/animation. Don't drift toward
-  realism, and don't drift toward "generic mobile game" either — see
-  ARCHITECTURE.md's rendering note before assuming Skia can do this as-is.
+- Visual style: low-poly + modern lighting/animation, real 3D meshes via
+  react-three-fiber (not 2D Skia sprites). Don't drift toward realism, and
+  don't drift toward "generic mobile game" either.
 
 ## Session workflow
 1. Check `PROGRESS.md` → current state, next task.

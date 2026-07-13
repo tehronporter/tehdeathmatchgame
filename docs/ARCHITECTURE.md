@@ -1,6 +1,9 @@
 # Architecture — Deathmatch Arena
 
-## ⚠️ Open decision: rendering & physics engine (read before Phase 1)
+## ✅ Resolved: rendering & physics engine — Option B
+
+Decided 2026-07-13: Option B (react-three-fiber + expo-gl + cannon-es). See
+PROGRESS.md Decision Log. The section below is kept as the record of why.
 
 The original stack notes list **React Native Skia** for rendering and
 **Matter.js** for physics. Worth being direct about this: Skia is a 2D canvas
@@ -53,7 +56,8 @@ Decision Log before starting Phase 2.
 - `cannon-es` for 3D physics (ragdoll, knockback, collisions)
 - `react-native-reanimated` for UI-layer animation (HUD, menus, meters)
 - Zustand (or similar) for client state
-- `expo-av` for audio
+- `expo-audio` for audio (`expo-av` is deprecated in SDK 57, swapped out during
+  Phase 0 setup)
 
 **Backend (post-prototype)**
 - Supabase: auth, Postgres (player profiles, stats, cosmetics), Realtime
@@ -152,7 +156,7 @@ event → forced match end) defined per-arena or per-character in
 `src/game/finishers`.
 
 **Audio** — crowd cheers reactive to hits/Hype level, announcer barks,
-impact SFX, arcade music bed. `expo-av`, triggered from game events, not
+impact SFX, arcade music bed. `expo-audio`, triggered from game events, not
 polled from render loop.
 
 ## 4. Data models (TypeScript, prototype scope)
