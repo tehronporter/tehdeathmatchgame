@@ -176,7 +176,7 @@ export function FightScene({ playerCharacter, opponentCharacter, arena, onMatchE
   const opponentRig = useMemo(() => createFighterRig(world, 1.5), [world]);
 
   return (
-    <Canvas camera={{ position: [0, 2.2, 7], fov: 50 }}>
+    <Canvas style={{ flex: 1 }} camera={{ position: [0, 2.2, 7], fov: 50 }}>
       <color attach="background" args={[arena.color]} />
       <ambientLight intensity={0.7} />
       <directionalLight position={[3, 6, 3]} intensity={1.3} />

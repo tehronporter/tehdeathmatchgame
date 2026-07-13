@@ -16,6 +16,8 @@ export default function CharacterSelect() {
       <FlatList
         data={ROSTER}
         horizontal
+        showsHorizontalScrollIndicator={false}
+        style={styles.listWrap}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
         renderItem={({ item }) => (
@@ -54,16 +56,22 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     letterSpacing: 3,
   },
+  listWrap: {
+    flexGrow: 0,
+  },
   list: {
     gap: 12,
     paddingHorizontal: 16,
+    alignItems: 'center',
   },
   card: {
     width: 120,
+    height: 180,
     padding: 12,
     borderWidth: 2,
     backgroundColor: theme.colors.panel,
     alignItems: 'center',
+    justifyContent: 'center',
     gap: 6,
   },
   swatch: {
