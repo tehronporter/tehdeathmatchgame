@@ -14,6 +14,8 @@ controls, over-the-top comedic finishers.
    what to build next. Don't jump ahead to later phases.
 5. `docs/PROGRESS.md` — living log: what's done, what's in progress, open decisions.
    Update this after every meaningful chunk of work.
+6. `docs/NEXT_STEPS.md` — the authoritative go-forward plan (reference study +
+   phased priorities). Start here for "what do I build next."
 
 ## Ground rules
 - iOS only for now (Expo managed workflow → EAS build → TestFlight).

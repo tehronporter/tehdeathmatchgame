@@ -87,10 +87,14 @@ PLAY → character select → fight themselves on the already-booted simulator t
 confirm combat feels right and holds framerate.
 
 ## Next up
-- User playtest of the actual fight loop (feel, framerate, whether the
-  Hype/finisher pacing works) — this needs a human tapping through it.
-- Once playtested: source real character/arena assets, then decide when to
-  spend the user's own credentials on Supabase + Apple Developer setup.
+See **`docs/NEXT_STEPS.md`** — the authoritative go-forward plan, informed by
+the *MTV's Celebrity Deathmatch* reference. Immediate blocker: the fight
+screen renders pure black (expo-gl / r3f Canvas not painting) — Phase 0.1.
+
+Known bugs confirmed on-device (2026-07-13):
+- Fight `<Canvas>` renders nothing — not even the arena background color.
+- `MeterBar` fill never shows (Reanimated can't animate width to a `%` string).
+- Character-select cards stretch to full screen height.
 
 ## Decision log
 | Date | Decision | Why |
