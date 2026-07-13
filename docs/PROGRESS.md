@@ -47,9 +47,48 @@ Phase 5 complete (client-side). Phases 6-7 blocked on external credentials
   by "PS1 low-poly." No art pipeline exists yet — needs either a commissioned
   artist, a marketplace low-poly asset pack, or an AI mesh-gen pipeline.
 
+## Verified on simulator (2026-07-13)
+Ran `npx expo run:ios` end-to-end and confirmed the app boots on iPhone 17 Pro
+(iOS simulator) with the main menu rendering correctly and Expo Router
+navigation working. Hit and fixed several environment issues along the way,
+worth knowing about for future sessions:
+
+- **CocoaPods + non-UTF-8 shell locale**: first `pod install` crashed with a
+  Ruby `Encoding::CompatibilityError`. Fix: run with
+  `LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8`.
+- **This repo lives inside an iCloud-synced Documents folder.** iCloud's file
+  provider stamps newly-created build files with `com.apple.FinderInfo` /
+  `com.apple.fileprovider.fpfs#P` metadata that `codesign` rejects
+  ("resource fork, Finder information, or similar detritus not allowed") when
+  signing the ExpoModulesJSI xcframework, and also causes intermittent
+  "Build input file cannot be found" errors for React codegen output because
+  freshly-written files aren't reliably visible to Xcode's build system.
+  **Fix applied**: `node_modules` and `ios/build` are relocated to
+  `~/.local-build-cache/tehdeathmatchgame/` and symlinked back into the repo
+  (`ios/` itself must stay a real directory — Podfile scripts resolve
+  `ios/..` paths and break if `ios` itself is a symlink). If this project is
+  ever moved to a non-iCloud-synced path, these symlinks can be undone by
+  moving the real directories back and deleting the cache folder.
+- **`babel-preset-expo` got silently pruned** from `node_modules` during one
+  of the `npm install --legacy-peer-deps` passes (it's an optional peer dep
+  of `expo`, not a direct dependency) — Metro failed with `MODULE_NOT_FOUND`.
+  Fixed by adding it explicitly: `npm install --save-dev babel-preset-expo`.
+  If Metro ever throws this again, that's the fix.
+- **First clean codegen build is flaky**: Xcode's build system sometimes
+  looks for React codegen `.mm`/`.cpp` output before the "Generate Specs"
+  script phase has produced it ("Build input file cannot be found"). A plain
+  retry usually clears it; if not, pre-run
+  `node node_modules/react-native/scripts/generate-codegen-artifacts.js -p . -t ios -o ios/build`
+  before building.
+
+Not yet verified: actually playing a match (this environment has no touch-
+input simulation available, only screenshots) — the user should tap through
+PLAY → character select → fight themselves on the already-booted simulator to
+confirm combat feels right and holds framerate.
+
 ## Next up
-- Playtest the local prototype on-device (first `pod install` hit a
-  CocoaPods/locale bug, resolved by rerunning with `LANG=en_US.UTF-8`).
+- User playtest of the actual fight loop (feel, framerate, whether the
+  Hype/finisher pacing works) — this needs a human tapping through it.
 - Once playtested: source real character/arena assets, then decide when to
   spend the user's own credentials on Supabase + Apple Developer setup.
 
