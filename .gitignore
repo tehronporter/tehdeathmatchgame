@@ -41,9 +41,8 @@ yarn-error.*
 /ios
 /android
 
-# Godot
+# Godot (note: asset *.import files ARE committed — they're build metadata)
 godot/.godot/
 godot/android/
-godot/*.import
 godot/export_presets.cfg
 /godot-exports/

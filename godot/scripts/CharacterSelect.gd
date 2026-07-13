@@ -91,4 +91,5 @@ func _select(id: String) -> void:
 
 func _on_enter() -> void:
 	MatchConfig.randomize_opponent()
+	MatchConfig.randomize_arena()
 	get_tree().change_scene_to_file("res://scenes/VS.tscn")

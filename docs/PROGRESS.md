@@ -26,9 +26,16 @@ is a complete, verified-on-desktop playable game:
   `--screenshot`) render any screen headlessly. Uses the GL-compatibility
   renderer (this Intel Mac's MoltenVK is broken); iOS uses native Metal.
 
-Remaining for "done": sound pass (no audio assets yet), richer arena dressing
-+ crowd, real low-poly character models, PS1/CRT shader polish, then G7 ship
-(iOS export → your Apple Developer account; Supabase → your project keys).
+Also done: procedural SFX + looping crowd (`Audio` autoload), crowd backdrop,
+random arena per match (all 6), global CRT scanline/vignette overlay (`CRT`),
+UI click sound.
+
+Remaining for a fuller "done": real low-poly character models (placeholder
+box+head fighters today), announcer VO + music bed, career/shop screens
+(shop is a placeholder), then **G7 ship** — iOS export needs Godot's iOS
+export templates + **your Apple Developer account** for signing/TestFlight;
+Supabase online needs **your project keys** (integrate via Godot
+HTTPRequest/WebSocket). These are the only genuinely blocked items.
 
 ## (Historical — Expo/RN build, retired)
 

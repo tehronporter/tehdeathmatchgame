@@ -56,6 +56,11 @@ static func button(text: String, enabled := true) -> Button:
 	b.add_theme_stylebox_override("pressed", panel_style(ACCENT, ACCENT.darkened(0.6)))
 	b.add_theme_stylebox_override("disabled", panel_style(DIM.darkened(0.5)))
 	b.add_theme_stylebox_override("focus", panel_style(ACCENT))
+	if enabled:
+		b.pressed.connect(func():
+			var a := b.get_tree().root.get_node_or_null("Audio")
+			if a:
+				a.ui_sfx())
 	return b
 
 ## Full-screen dark background for a menu root.

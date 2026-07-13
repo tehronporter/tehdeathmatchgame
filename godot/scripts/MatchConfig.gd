@@ -22,3 +22,7 @@ func arena() -> Dictionary:
 func randomize_opponent() -> void:
 	var pool := GameData.ROSTER.filter(func(c): return c["id"] != player_id)
 	opponent_id = pool[randi() % pool.size()]["id"]
+
+## Pick a random arena for variety.
+func randomize_arena() -> void:
+	arena_id = GameData.ARENAS[randi() % GameData.ARENAS.size()]["id"]

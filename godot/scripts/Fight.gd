@@ -28,14 +28,18 @@ var p_bars := {}
 var o_bars := {}
 var banner: Label
 var finish_hint: Label
+var audio: Node
 
 func _ready() -> void:
 	randomize()
+	audio = get_node_or_null("/root/Audio")
 	_build_world()
 	_spawn_fighters()
 	_build_hud()
 	_build_controls()
 	hazard_ms = 0.0
+	if audio:
+		audio.start_crowd()
 	_apply_debug()
 
 # ---------------------------------------------------------------- world
@@ -72,6 +76,18 @@ func _build_world() -> void:
 	for h in [0.7, 1.2, 1.7]:
 		_add_box(Vector3(9.2, 0.06, 0.06), Vector3(0, h, -3.0), Color("d0d0d0"))
 		_add_box(Vector3(9.2, 0.04, 0.04), Vector3(0, h, 3.0), Color("d0d0d0"))
+	_build_crowd()
+
+func _build_crowd() -> void:
+	# Cheap crowd: rows of small dim boxes behind the ring.
+	var palette := [Color("2a2f45"), Color("3a2a2a"), Color("2a3a2f"), Color("332a3a")]
+	for row in range(3):
+		var z := -5.0 - row * 1.1
+		var y := 0.4 + row * 0.7
+		for i in range(24):
+			var x := -11.0 + i * 0.95 + randf_range(-0.15, 0.15)
+			var c: Color = palette[randi() % palette.size()].lightened(randf_range(0.0, 0.25))
+			_add_box(Vector3(0.5, 0.9, 0.5), Vector3(x, y, z), c)
 
 func _add_box(size: Vector3, pos: Vector3, color: Color) -> void:
 	var m := MeshInstance3D.new()
@@ -305,6 +321,8 @@ func _do_attack(attacker: Node3D, defender: Node3D, move_id: String) -> void:
 		defender.position.x = clamp(defender.position.x + push * float(res["knockback"]) * 0.12, -RING_HALF, RING_HALF)
 		_spark((attacker.global_position + defender.global_position) * 0.5 + Vector3(0, 1.2, 0))
 		_shake()
+		if audio:
+			audio.hit_sfx()
 		if attacker == player and move_id == "punch":
 			PlayerProfile.record_punch()
 
@@ -386,6 +404,8 @@ func _end(winner: int) -> void:
 	var w: Node3D = player if winner == 0 else opponent
 	var l: Node3D = opponent if winner == 0 else player
 	l.flop()
+	if audio:
+		audio.ko_sfx()
 	MatchConfig.last_winner = winner
 	# Two-stage: a full-Hype winner earns the character finisher; else plain KO.
 	if w.hype >= 100.0:
