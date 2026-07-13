@@ -7,12 +7,15 @@ config_version=5
 
 config/name="Deathmatch Arena"
 config/features=PackedStringArray("4.7")
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.svg"
 
 [autoload]
 
 GameData="*res://scripts/GameData.gd"
+MatchConfig="*res://scripts/MatchConfig.gd"
+PlayerProfile="*res://scripts/PlayerProfile.gd"
+Shot="*res://scripts/Shot.gd"
 
 [display]
 

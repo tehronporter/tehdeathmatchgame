@@ -4,8 +4,33 @@ Update this file at the end of every session. Keep entries short — this is a
 status board, not a diary.
 
 ## Current phase
-Phase 5 complete (client-side). Phases 6-7 blocked on external credentials
-(see below) — everything code-only within them is done.
+**Godot 4 rebuild — full playable game loop done & verified** (see the Godot
+section below). Old Expo/RN build is retired (kept in git history as a spec).
+
+## Godot build status (2026-07-13)
+Engine migrated to Godot 4.7 (see ENGINE_EVALUATION.md). The `godot/` project
+is a complete, verified-on-desktop playable game:
+- **Full loop:** Main Menu → Character Select (10 fighters) → VS screen →
+  Fight → Results, all wired and screenshot-verified.
+- **Fight (G1):** 2.5D ring (floor/posts/ropes), two characterful fighters
+  (torso + oversized head + limbs, shadows), joystick + P/K/G/S touch controls
+  + keyboard, combat via `GameData.resolve_move`, single-tier-per-setting AI,
+  live Health/Stamina/Hype HUD, timed arena hazard, **two-stage KO** (weaken →
+  "FINISH!" → Hype finisher with camera punch-in + comedic flop), plain K.O.
+  otherwise.
+- **Presentation (G2):** MTV-chrome UI kit (`UI.gd`), portrait select, VS beat,
+  Settings (difficulty → AI reaction), Leaderboard (live profile).
+- **Progression (G5-equiv):** `PlayerProfile` autoload persists
+  XP/level/coins/wins/streak/achievements/dailies to `user://profile.json`.
+- **Verify loop:** `godot/verify.sh` + `Shot` autoload (`--goto`/`--debug`/
+  `--screenshot`) render any screen headlessly. Uses the GL-compatibility
+  renderer (this Intel Mac's MoltenVK is broken); iOS uses native Metal.
+
+Remaining for "done": sound pass (no audio assets yet), richer arena dressing
++ crowd, real low-poly character models, PS1/CRT shader polish, then G7 ship
+(iOS export → your Apple Developer account; Supabase → your project keys).
+
+## (Historical — Expo/RN build, retired)
 
 ## Completed
 - Phase 0: Expo Router scaffold, all core deps (r3f, cannon-es, reanimated,
